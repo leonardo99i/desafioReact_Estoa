@@ -1,25 +1,75 @@
+/* StarWars.css */
+
 .star-wars-container {
   background-color: #282c34;
   padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .star-wars-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-gap: 20px;
+  margin-top: 20px;
 }
 
 .star-wars-card {
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   border-radius: 10px;
   padding: 20px;
-  color: #000000;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .star-wars-card h2 {
-  margin-top: 0;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .star-wars-card p {
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.expand-button {
+  background-color: #282c34;
+  color: #f2f2f2;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.expand-button:hover {
+  background-color: #f2f2f2;
+  color: #282c34;
+}
+
+.expanded-info {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .star-wars-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .star-wars-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .star-wars-cards {
+    grid-template-columns: 1fr;
+  }
 }

@@ -50,7 +50,12 @@ function StarWars() {
           <div className="star-wars-card" key={character.name}>
             <h2>{character.name}</h2>
             <p>
-              <strong>Species:</strong> {character.species}
+              <strong>Species:</strong>{" "}
+              {character.species.length > 0
+                ? character.species.map((specie) => specie.name).join(", ")
+                : character.species.length === 0
+                  ? "Unknown"
+                  : "Loading..."}
             </p>
             <p>
               <strong>Birth Year:</strong> {character.birth_year}
