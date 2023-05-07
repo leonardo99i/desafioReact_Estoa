@@ -1,75 +1,93 @@
-/* StarWars.css */
-
 .star-wars-container {
-  background-color: #282c34;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .star-wars-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-  margin-top: 20px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .star-wars-card {
-  background-color: #f2f2f2;
+  background-color: #1d2023;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  height: 200px; /* Defina a altura desejada para os cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.star-wars-card h2 {
-  font-size: 20px;
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
 }
 
-.star-wars-card p {
-  font-size: 16px;
-  margin-bottom: 5px;
+.card-header h2 {
+  margin: 0;
 }
 
 .expand-button {
-  background-color: #282c34;
-  color: #f2f2f2;
+  background-color: #ffd700;
+  color: #000;
   border: none;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   font-size: 20px;
-  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.expand-button:hover {
-  background-color: #f2f2f2;
-  color: #282c34;
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  outline: none;
 }
 
-.expanded-info {
-  margin-top: 10px;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media screen and (max-width: 1200px) {
-  .star-wars-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.modal-content {
+  text-align: center;
+  color: #fff;
 }
 
-@media screen and (max-width: 900px) {
-  .star-wars-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .star-wars-cards {
-    grid-template-columns: 1fr;
-  }
+.close-button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }

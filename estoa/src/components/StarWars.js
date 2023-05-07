@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 
 import './StarWars.css';
 
 function StarWars() {
   const [characters, setCharacters] = useState([]);
-  const [expandedCharacters, setExpandedCharacters] = useState([]);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
 
   useEffect(() => {
     async function fetchCharacters() {
@@ -35,60 +36,78 @@ function StarWars() {
   }, []);
 
   const handleExpandCharacter = (character) => {
-    if (expandedCharacters.includes(character)) {
-      setExpandedCharacters(expandedCharacters.filter((c) => c !== character));
-    } else {
-      setExpandedCharacters([...expandedCharacters, character]);
-    }
+    setSelectedCharacter(character);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCharacter(null);
   };
 
   return (
     <div className="star-wars-container">
-      <h1>Star Wars Characters</h1>
       <div className="star-wars-cards">
         {characters.map((character) => (
           <div className="star-wars-card" key={character.name}>
-            <h2>{character.name}</h2>
+            <div className="card-header">
+              <h2>{character.name}</h2>
+              <button className="expand-button" onClick={() => handleExpandCharacter(character)}>
+                +
+              </button>
+            </div>
             <p>
-              <strong>Species:</strong>{" "}
-              {character.species.length > 0
-                ? character.species.map((specie) => specie.name).join(", ")
-                : character.species.length === 0
-                  ? "Unknown"
-                  : "Loading..."}
+              <strong>Species:</strong> {character.species.length > 0 ? character.species[0] : 'Unknown'}
             </p>
             <p>
               <strong>Birth Year:</strong> {character.birth_year}
             </p>
-            {expandedCharacters.includes(character) ? (
-              <div className="expanded-info">
-                <p>
-                  <strong>Eye Color:</strong> {character.eye_color}
-                </p>
-                <p>
-                  <strong>Skin Color:</strong> {character.skin_color}
-                </p>
-                <p>
-                  <strong>Hair Color:</strong> {character.hair_color}
-                </p>
-                <button
-                  className="expand-button"
-                  onClick={() => handleExpandCharacter(character)}
-                >
-                  -
-                </button>
-              </div>
-            ) : (
-              <button
-                className="expand-button"
-                onClick={() => handleExpandCharacter(character)}
-              >
-                +
-              </button>
-            )}
           </div>
         ))}
       </div>
+      <Modal
+        isOpen={selectedCharacter !== null}
+        onRequestClose={handleCloseModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        {selectedCharacter && (
+          <div className="modal-content">
+            <button className="close-button" onClick={handleCloseModal}>
+              X
+            </button>
+            <h2>{selectedCharacter.name}</h2>
+            <p>
+              <strong>Species:</strong> {selectedCharacter.species.length > 0 ? selectedCharacter.species[0] : 'Unknown'}
+            </p>
+            <p>
+              <strong>Birth Year:</strong> {selectedCharacter.birth_year}
+            </p>
+            <p>
+              <strong>Eye Color:</strong> {selectedCharacter.eye_color}
+            </p>
+            <p>
+              <strong>Gender:</strong> {selectedCharacter.gender}
+            </p>
+            <p>
+              <strong>Hair Color:</strong> {selectedCharacter.hair_color}
+            </p>
+            <p>
+              <strong>Height:</strong> {selectedCharacter.height}
+            </p>
+            <p>
+              <strong>Mass:</strong> {selectedCharacter.mass}
+            </p>
+            <p>
+              <strong>Skin Color:</strong> {selectedCharacter.skin_color}
+            </p>
+            <p>
+              <strong>Home World:</strong> {selectedCharacter.homeworld}
+            </p>
+            <p>
+              <strong>Films:</strong> {selectedCharacter.films.join(', ')}
+            </p>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
