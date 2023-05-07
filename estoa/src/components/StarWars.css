@@ -14,17 +14,21 @@
 }
 
 .star-wars-card {
-  background-color: #1d2023;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
+  position: relative;
+  width: 350px;
+  height: 300px;
+  background-color: #282c34;
   color: #fff;
-  height: 200px; /* Defina a altura desejada para os cards */
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-
 
 .card-header {
   display: flex;
@@ -38,30 +42,32 @@
 }
 
 .expand-button {
-  background-color: #ffd700;
-  color: #000;
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: yellow;
+  color: black;
   font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-weight: bold;
+  border: none;
+  outline: none;
   cursor: pointer;
+  z-index: 2;
+  border-radius: 50px;
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #282c34;
   border-radius: 10px;
   padding: 20px;
   max-width: 600px;
   width: 100%;
   outline: none;
+  z-index: 9999; /* Ajuste a ordem de camadas do modal */
 }
 
 .overlay {
@@ -74,6 +80,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9998; /* Ajuste a ordem de camadas do overlay */
 }
 
 .modal-content {
@@ -82,12 +89,17 @@
 }
 
 .close-button {
-  background-color: transparent;
-  color: #fff;
+  background-color: yellow;
+  color: black;
   border: none;
   font-size: 30px;
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
+  border-radius: 50px;
+}
+
+.star-wars-modal .expand-button {
+  display: none;
 }

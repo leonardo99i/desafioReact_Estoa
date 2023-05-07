@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Modal from 'react-modal';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Modal from "react-modal";
 
-import './StarWars.css';
+import "./StarWars.css";
 
 function StarWars() {
   const [characters, setCharacters] = useState([]);
@@ -13,7 +13,7 @@ function StarWars() {
       try {
         let allCharacters = [];
 
-        let response = await axios.get('https://swapi.dev/api/people/');
+        let response = await axios.get("https://swapi.dev/api/people/");
         let { results, next } = response.data;
 
         allCharacters = allCharacters.concat(results);
@@ -26,7 +26,21 @@ function StarWars() {
           allCharacters = allCharacters.concat(results);
         }
 
-        setCharacters(allCharacters);
+        // Buscar o nome da espécie para cada personagem
+        const charactersWithSpecies = await Promise.all(
+          allCharacters.map(async (character) => {
+            const speciesNames = await Promise.all(
+              character.species.map(async (speciesURL) => {
+                const speciesResponse = await axios.get(speciesURL);
+                return speciesResponse.data.name;
+              })
+            );
+
+            return { ...character, species: speciesNames };
+          })
+        );
+
+        setCharacters(charactersWithSpecies);
       } catch (error) {
         console.log(error);
       }
@@ -50,12 +64,16 @@ function StarWars() {
           <div className="star-wars-card" key={character.name}>
             <div className="card-header">
               <h2>{character.name}</h2>
-              <button className="expand-button" onClick={() => handleExpandCharacter(character)}>
+              <button
+                className="expand-button"
+                onClick={() => handleExpandCharacter(character)}
+              >
                 +
               </button>
             </div>
             <p>
-              <strong>Species:</strong> {character.species.length > 0 ? character.species[0] : 'Unknown'}
+              <strong>Species:</strong>{" "}
+              {character.species.length > 0 ? character.species[0] : "Unknown"}
             </p>
             <p>
               <strong>Birth Year:</strong> {character.birth_year}
@@ -76,7 +94,10 @@ function StarWars() {
             </button>
             <h2>{selectedCharacter.name}</h2>
             <p>
-              <strong>Species:</strong> {selectedCharacter.species.length > 0 ? selectedCharacter.species[0] : 'Unknown'}
+              <strong>Species:</strong>{" "}
+              {selectedCharacter.species.length > 0
+                ? selectedCharacter.species[0]
+                : "Unknown"}
             </p>
             <p>
               <strong>Birth Year:</strong> {selectedCharacter.birth_year}
@@ -103,7 +124,7 @@ function StarWars() {
               <strong>Home World:</strong> {selectedCharacter.homeworld}
             </p>
             <p>
-              <strong>Films:</strong> {selectedCharacter.films.join(', ')}
+              <strong>Films:</strong> {selectedCharacter.films.join(", ")}
             </p>
           </div>
         )}
