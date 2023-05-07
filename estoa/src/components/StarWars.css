@@ -1,0 +1,25 @@
+.star-wars-container {
+  background-color: #282c34;
+  padding: 20px;
+}
+
+.star-wars-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.star-wars-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  color: #000000;
+}
+
+.star-wars-card h2 {
+  margin-top: 0;
+}
+
+.star-wars-card p {
+  margin-bottom: 10px;
+}
