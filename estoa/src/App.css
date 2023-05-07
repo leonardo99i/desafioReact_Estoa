@@ -13,12 +13,19 @@ body {
 }
 
 .App-header {
+  display: flex;
+  align-items: center;
   justify-content: center;
+  border-radius: 10px;
   background-color: #282c34;
   padding: 35px;
   text-align: center;
 }
 
 .App-header h1 {
-  margin: 0 auto;
+  margin: 0;
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
 }
+
