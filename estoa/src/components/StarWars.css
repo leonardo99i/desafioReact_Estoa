@@ -67,7 +67,7 @@
   max-width: 600px;
   width: 100%;
   outline: none;
-  z-index: 9999; /* Ajuste a ordem de camadas do modal */
+  z-index: 9999;
 }
 
 .overlay {
@@ -80,7 +80,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9998; /* Ajuste a ordem de camadas do overlay */
+  z-index: 9998;
 }
 
 .modal-content {
@@ -102,4 +102,15 @@
 
 .star-wars-modal .expand-button {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .star-wars-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .star-wars-card {
+    width: 100%;
+    height: auto;
+  }
 }

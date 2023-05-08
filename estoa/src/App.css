@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 
 .App {
@@ -9,7 +8,6 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  text-align: center;
 }
 
 .App-header {
@@ -22,10 +20,32 @@ body {
   text-align: center;
 }
 
-.App-header h1 {
-  margin: 0;
-  color: #000000;
-  font-size: 28px;
-  font-weight: bold;
+.app-title {
+  color: #000;
+  font-size: 24px;
 }
 
+.app-title span {
+  margin: 0 10px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.app-header {
+  background-color: #282c34;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #ffc107;
+}
